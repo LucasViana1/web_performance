@@ -1,7 +1,7 @@
 {
   "name": "otimiza-web",
   "version": "0.0.1",
-  "author": "Sérgio Lopes",
+  "author": "Lucas Viana",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-if": "^2.0.0",
