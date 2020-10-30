@@ -79,3 +79,16 @@ O tamanho do html aumenta, para se ter uma ideia de até que ponto utilizar o **
 ## Paralelização de requisições
 
 A paralelização de requisições consiste em colocar alguns recursos (normalmente importações de imagens) em um dominio diferente da página, dessa forma separando as responsabilidades no carregamento, que antes aceitaria 6 conexões TCP em paralelo pode aceitar praticamente 12 conexões em paralelo com uso de um dominio adicional.
+
+<hr />
+
+## Critical Rendering Path
+
+Se refere a ordem de renderização de uma página, que por padrão realiza a chamada dos recursos externos ao index (scripts e css) na sequencia que foram importados, apenas após o carregamento desses recursos é que os elementos da tag `<body>` são chamados, podemos dizer que essas importações são bloqueantes do ponto de vista de renderização da página.
+Uma maneira de melhor a experiencia do usuário para esse caso seria realizar a importação dos scripts ao final da tag `<body>`, após a construção dos elementos da DOM, dessa maneira evita que os scripts bloqueam a renderização das tags na *Render Tree*.
+
+![Critical Rendering Path](https://res.infoq.com/presentations/critical-rendering-path/pt/slides/sl8.jpg)
+
+## Async
+Por padrão as importação dos scripts são carregados e executados em sequência, o que em determinados cenários pode trazer atrasos na execução da sequência de scripts. Uma alternativa é determinar que o script é não bloqueante (assíncrono), ou seja, não depende de outros scripts e após ser carregado já pode ser executado imadiatamente. Exemplo de sintaxe:
+`<script async src="assets/js/menu.js"></script>`
